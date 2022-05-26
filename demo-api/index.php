@@ -7,7 +7,7 @@
     </head>
     <body>
         <?php
-
+            //Функция авторизации
             function oauth () {
                 $url_api_oauth = 'https://taxi-demo.intermobility.ru/tpapi/oauth/token';
 
@@ -39,7 +39,7 @@
 
                 echo 'access key generated!<br>';
             }
-
+            //Функция запроса
             function query () {
                 $url_api = 'https://taxi-demo.intermobility.ru/tpapi/';
 
