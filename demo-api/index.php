@@ -11,9 +11,9 @@
             function oauth () {
                 $url_api_oauth = 'https://taxi-demo.intermobility.ru/tpapi/oauth/token';
 
-                $userid = 'tp_78';
-                $clientid = '16455';
-                $password = 'qsigezc4qiysp0rc';
+                $userid = ''; //указать user_id
+                $clientid = ''; //указать client_id
+                $password = ''; //указать пароль
 
                 $oauth_header = array (
                     'Content-Type: application/x-www-form-urlencoded'
@@ -43,8 +43,7 @@
             function query () {
                 $url_api = 'https://taxi-demo.intermobility.ru/tpapi/';
 
-                $access_token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NTM1NTY1NTgsImV4cCI6MTY1MzU2MDE1OCwic3ViIjoidHBfNzgiLCJvaWQiOjc4LCJlaWQiOjE2NDU1LCJldHlwIjoiT1BFUkFUT1IiLCJyb2wiOlsiQUNDUkVESVRfT1JHUyIsIkVESVRfRU1QTE9ZRUVTIiwiRURJVF9WRUhJQ0xFUyIsIkxJU1RfRFJJVkVSUyIsIkxJU1RfRU1QTE9ZRUVTIiwiTElTVF9OT1RJRklDQVRJT05TIiwiTElTVF9UUlVTVEVEX09SR1MiLCJMSVNUX1ZFSElDTEVTIiwiTElTVF9XQVlCSUxMUyIsIk1PRElGWV9FTVBMT1lFRVMiLCJNT0RJRllfVkVISUNMRVMiLCJNT0RJRllfV0FZQklMTFMiLCJSRUFEX1JPTEVTIiwiUk9MRV9FTVBMT1lFRV9BRE1JTiIsIlJPTEVfT1JHX1BST0ZJTEVfVklFV0VSIiwiUk9MRV9UQVhJUEFSS19PUEVSQVRPUiIsIlJPTEVfVkVISUNMRV9FRElUT1IiLCJST0xFX1dBWUJJTExfSVNTVUVSIiwiVklFV19FTVBMT1lFRVMiLCJWSUVXX0hFTFAiLCJWSUVXX09SR1MiLCJWSUVXX09SR19QUk9GSUxFIiwiVklFV19WRUhJQ0xFUyIsIlZJRVdfV0FZQklMTFMiXX0.rIVwK3MGA0Xx9zZevWI5EfkSNDL8ue7n8GstqBgEZnmHRRr1tf5N6wIlsoyuumYgJ-Q038BcjvRFgecSGCfUeg';
-                //Токен доступа взять из oath_key.json
+                $access_token = ''; //Токен доступа взять из oath_key.json
                 $api_headers = array (
                     'Authorization: Bearer '. $access_token,
                     'content-type: application/json',
