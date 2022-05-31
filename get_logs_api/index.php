@@ -6,9 +6,20 @@
     <title>AAAAA</title> <!-- Ну вот так вот прост -->
 </head>
 <body>
-    <?php
-        $dir = __DIR__ . '/logs/'; //Директария логов
-    
+    <form action = "" method = "GET">
+        <select name = "select" size = "10">
+            <?php
+                $dir = __DIR__ . '/logs/'; //Директария логов
+                foreach( glob($dir . '*.log') as $file )
+                {
+                    $file_name = basename($file);
+                    echo '<option>'.$file_name.'</option>';
+                }
+            ?>
+        </select>
+    </form>
+<!--     <?php
+
         $index = 1; //Номер лога
 
         $logs = []; //Массив с логами
@@ -69,6 +80,6 @@
         echo '<pre>';
         print_r($logs);
         echo '</pre>';
-    ?>
+    ?> -->
 </body>
 </html>
