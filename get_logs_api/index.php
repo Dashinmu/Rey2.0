@@ -18,6 +18,7 @@
         $log_oAuthStackTraceError = 'League\OAuth2\Server\Exception\OAuthServerException';
         $log_oAuthStackTraceWarning = 'PDOException:';
         $log_arrayStack = 'array (';
+        $log_debugError  = 'Debug\Exception\FatalErrorException';
         $log_null = '  ';
         $date_string = '';
         $type_string = '';
@@ -42,7 +43,7 @@
                     $type_index_spacer = strpos($line, ':', $date_index_end);
                     $type_string = substr($line, $date_index_end + 2, $type_index_spacer - $date_index_end - 2);
                     $info_string = substr($line, $type_index_spacer + 2, strlen($line));
-                    if ( ( str_contains($info_string, $log_oAuthStackTraceError) == true ) or (str_contains($info_string, $log_oAuthStackTraceWarning) == true ) or (str_contains($info_string, $log_arrayStack) == true ) or ( ($info_string[0] == ' ') and ($info_string[1] == ' ') ) ) //Если строка информации содержит указанные подстроки - продолжать запись лога 
+                    if ( ( str_contains($info_string, $log_oAuthStackTraceError) == true ) or (str_contains($info_string, $log_oAuthStackTraceWarning) == true ) or (str_contains($info_string, $log_arrayStack) == true ) or ( ($info_string[0] == ' ') and ($info_string[1] == ' ') ) or ( str_contains($info_string, $log_debugError) == true  ) ) //Если строка информации содержит указанные подстроки - продолжать запись лога 
                     {
                         $flag = false;
                     }
