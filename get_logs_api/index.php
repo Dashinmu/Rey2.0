@@ -9,19 +9,19 @@
     <?php
         $dir = __DIR__ . '/logs/'; //Директария логов
     
-        $index = 0; //Номер лога
+        $index = 1; //Номер лога
 
         $logs = []; //Массив с логами
 
-        //Переменные для позиционирования, для вывода
-        //$date_index_begin = 0;
+        //Переменные и проблемные ошибки
         $flag = false;
+        $log_oAuthStackTraceError = 'League\OAuth2\Server\Exception\OAuthServerException';
+        $log_oAuthStackTraceWarning = 'PDOException:';
+        $log_arrayStack = 'array (';
+        $log_null = '   ';
         $date_string = '';
         $type_string = '';
         $info_string = '';
-        //$date_index_end = 0;
-        //$type_index_spacer = 0;
-        //$lenght_string = 0;
 
         //Для каждого файла типа .log в директории $dir
         foreach (glob($dir . '*.log') as $file) 
@@ -37,9 +37,23 @@
                 if ($line[0] == '[') 
                 {
                     $flag = true;
+                    $date_index_end = strpos($line, ']');
+                    $date_string = substr($line, 1, $date_index_end - 1);
+                    $type_index_spacer = strpos($line, ':', $date_index_end);
+                    $type_string = substr($line, $date_index_end + 2, $type_index_spacer - $date_index_end - 2);
+                    $info_string = substr($line, $type_index_spacer + 2, strlen($line));
+                    if ( ( str_contains($info_string, $log_oAuthStackTraceError) == true ) or (str_contains($info_string, $log_oAuthStackTraceWarning) == true ) or (str_contains($info_string, $log_arrayStack) == true )) 
+                    {
+                        $flag = false;
+                    }
                 } else 
                 {
                     $flag = false;
+                    $info_string = $info_string.$line;
+                    if ( ( $line[0] == ')' ) or ( str_contains($info_string, '{main}') == true ) )
+                    {
+                        $flag = true;
+                    }
                 }
 
                 //По флагу добавляем в logs, ибо не в каждой строчке лог
@@ -47,21 +61,6 @@
                 {
                     $index = ['date' => $date_string, 'type' => $type_string, 'info' => $info_string];
                     array_push($logs, $index);
-                }
-
-                //Условие для вывода лога, ибо все логи начинаются с '[', иначе просто добавление информации в строку info
-                if ($flag == true) 
-                {
-                    //$flag = true;
-                    $date_index_end = strpos($line, ']');
-                    $date_string = substr($line, 1, $date_index_end - 1);
-                    $type_index_spacer = strpos($line, ':', $date_index_end);
-                    $type_string = substr($line, $date_index_end + 2, $type_index_spacer - $date_index_end - 2);
-                    $info_string = substr($line, $type_index_spacer + 2, strlen($line));
-                } else 
-                {
-                    //$flag = false;
-                    $info_string = $info_string.$line;
                 }
             }
         }
