@@ -42,7 +42,7 @@
                     $type_index_spacer = strpos($line, ':', $date_index_end);
                     $type_string = substr($line, $date_index_end + 2, $type_index_spacer - $date_index_end - 2);
                     $info_string = substr($line, $type_index_spacer + 2, strlen($line));
-                    if ( ( str_contains($info_string, $log_oAuthStackTraceError) == true ) or (str_contains($info_string, $log_oAuthStackTraceWarning) == true ) or (str_contains($info_string, $log_arrayStack) == true )) 
+                    if ( ( str_contains($info_string, $log_oAuthStackTraceError) == true ) or (str_contains($info_string, $log_oAuthStackTraceWarning) == true ) or (str_contains($info_string, $log_arrayStack) == true )) //Если строка информации содержит указанные подстроки - продолжать запись лога 
                     {
                         $flag = false;
                     }
@@ -50,7 +50,7 @@
                 {
                     $flag = false;
                     $info_string = $info_string.$line;
-                    if ( ( $line[0] == ')' ) or ( str_contains($info_string, '{main}') == true ) )
+                    if ( ( $line[0] == ')' ) or ( str_contains($info_string, '{main}') == true ) ) //Если строка содержит указанные подстроки - конец записи лога
                     {
                         $flag = true;
                     }
