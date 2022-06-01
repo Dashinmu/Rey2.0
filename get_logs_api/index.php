@@ -6,21 +6,15 @@
     <title>AAAAA</title> <!-- Ну вот так вот прост -->
 </head>
 <body>
-    <form action = "" method = "GET">
-        <select name = "select" size = "10">
-            <?php
-                
-            ?>
-        </select>
-    </form>
     <?php
-        //Фукнция получения массива файлов, которые и есть указание даты логов. Возвращает массив файлов (дат)
+        //Фукнция получения массива файлов, названия которых и есть указание даты логов. Возвращает массив файлов (дат)
         function get_date()
         {
             $dir = __DIR__ . '/logs/'; //Директария логов
 
             $files = []; //Массив с именами файлов = дата записи логов
         
+            //Поиск всех файлов с расширением .log
             foreach( glob($dir . '*.log') as $file )
             {
                 $file_name = basename($file);
@@ -42,7 +36,7 @@
             $log_oAuthStackTraceWarning = 'PDOException:';
             $log_arrayStack = 'array (';
             $log_debugError  = 'Debug\Exception\FatalErrorException';
-            $log_null = '  ';
+            //$log_null = '  ';
             $date_string = '';
             $type_string = '';
             $info_string = '';
