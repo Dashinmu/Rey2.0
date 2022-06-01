@@ -9,37 +9,46 @@
     <form action = "" method = "GET">
         <select name = "select" size = "10">
             <?php
-                $dir = __DIR__ . '/logs/'; //Директария логов
-                foreach( glob($dir . '*.log') as $file )
-                {
-                    $file_name = basename($file);
-                    echo '<option>'.$file_name.'</option>';
-                }
+                
             ?>
         </select>
     </form>
-<!--     <?php
-
-        $index = 1; //Номер лога
-
-        $logs = []; //Массив с логами
-
-        //Переменные и проблемные ошибки
-        $flag = false;
-        $log_oAuthStackTraceError = 'League\OAuth2\Server\Exception\OAuthServerException';
-        $log_oAuthStackTraceWarning = 'PDOException:';
-        $log_arrayStack = 'array (';
-        $log_debugError  = 'Debug\Exception\FatalErrorException';
-        $log_null = '  ';
-        $date_string = '';
-        $type_string = '';
-        $info_string = '';
-
-        //Для каждого файла типа .log в директории $dir
-        foreach (glob($dir . '*.log') as $file) 
+    <?php
+        //Фукнция получения массива файлов, которые и есть указание даты логов. Возвращает массив файлов (дат)
+        function get_date()
         {
-            $log_file_name = $dir.basename($file); //Имя файла с логом
+            $dir = __DIR__ . '/logs/'; //Директария логов
 
+            $files = []; //Массив с именами файлов = дата записи логов
+        
+            foreach( glob($dir . '*.log') as $file )
+            {
+                $file_name = basename($file);
+                array_push($files, $file_name);
+            }
+            return ($files);
+        }
+
+        //Функция получения логов из $file_name файла (даты). Возвращает массив логов
+        function get_logs($file_name) 
+        {
+            $index = 1; //Номер лога
+
+            $logs = []; //Массив с логами
+    
+            //Переменные и проблемные ошибки
+            $flag = false;
+            $log_oAuthStackTraceError = 'League\OAuth2\Server\Exception\OAuthServerException';
+            $log_oAuthStackTraceWarning = 'PDOException:';
+            $log_arrayStack = 'array (';
+            $log_debugError  = 'Debug\Exception\FatalErrorException';
+            $log_null = '  ';
+            $date_string = '';
+            $type_string = '';
+            $info_string = '';
+
+            $log_file_name = $file_name; //Имя файла с логом
+    
             $f = fopen($log_file_name, "r"); //Открыть файл логов
 
             //Считывание всех строк в файле
@@ -75,11 +84,8 @@
                     array_push($logs, $index);
                 }
             }
+            return($logs);
         }
-        
-        echo '<pre>';
-        print_r($logs);
-        echo '</pre>';
-    ?> -->
+    ?>
 </body>
 </html>
